@@ -5,13 +5,14 @@ public class Main {
     static final String USER = "developer";
     static final String PASSWORD = "userpasw";
     static final String ALTER_TABLE = "ALTER TABLE students ADD country VARCHAR(30) NOT NULL";
+    static final String UPDATE_COUNTRY = "UPDATE students SET country = ? WHERE student_id = ?";
 
 
     public static void main(String[] args) {
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              Statement statement = conn.createStatement();
-             PreparedStatement preparedStatement = conn.prepareStatement("UPDATE students SET country = ? WHERE student_id = ?")) {
+             PreparedStatement preparedStatement = conn.prepareStatement(UPDATE_COUNTRY)) {
 
                statement.executeUpdate(ALTER_TABLE);
 
