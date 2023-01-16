@@ -1,20 +1,20 @@
 import java.sql.*;
 
 public class Main {
-    static final String URL = "jdbc:mysql://localhost:3306/newdb";
+    static final String DB_NAME = "newdb";
+    static final String URL = "jdbc:mysql://localhost:3306/"+DB_NAME;
     static final String USER = "developer";
     static final String PASSWORD = "userpasw";
-    static final String ALTER_TABLE = "ALTER TABLE students ADD country VARCHAR(30) NOT NULL";
-    static final String UPDATE_COUNTRY = "UPDATE students SET country = ? WHERE student_id = ?";
+
 
 
     public static void main(String[] args) {
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              Statement statement = conn.createStatement();
-             PreparedStatement preparedStatement = conn.prepareStatement(UPDATE_COUNTRY)) {
+             PreparedStatement preparedStatement = conn.prepareStatement("UPDATE students SET country = ? WHERE student_id = ?")) {
 
-               statement.executeUpdate(ALTER_TABLE);
+               statement.executeUpdate("ALTER TABLE students ADD country VARCHAR(30) NOT NULL");
 
                insertCountry(preparedStatement, "Italy",1);
                insertCountry(preparedStatement,"Italy",2);
